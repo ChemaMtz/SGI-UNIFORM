@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { 
   MdAdd, 
   MdEdit, 
@@ -11,6 +11,7 @@ import {
 } from 'react-icons/md';
 import { FaHardHat } from 'react-icons/fa';
 import { cascosService } from '../firebase/services';
+import NotificationContainer, { useNotification } from './Notification';
 import '../styles/inventory.css';
 
 /**
@@ -34,6 +35,9 @@ const Cascos = () => {
 
   // Referencia para el contenedor de la tabla
   const tableContainerRef = useRef(null);
+
+  // Hook para manejar notificaciones
+  const { notifications, showNotification, removeNotification } = useNotification();
 
   // Configuración del formulario con estructura CSV
   const [formData, setFormData] = useState({
@@ -92,12 +96,7 @@ const Cascos = () => {
     setEditingItem(null);
   };
 
-  // Cargar datos desde Firebase
-  useEffect(() => {
-    loadCascos();
-  }, []);
-
-  const loadCascos = async () => {
+  const loadCascos = useCallback(async (showErrorNotification = false) => {
     try {
       const data = await cascosService.getAll();
       // Procesar datos para calcular totalStock y actualizar estado basado en el stock
@@ -123,10 +122,22 @@ const Cascos = () => {
       setCascos(processedData);
     } catch (error) {
       console.error('Error al cargar cascos:', error);
+      if (showErrorNotification) {
+        showNotification(
+          `❌ Error al cargar los cascos de seguridad: ${error.message}`,
+          'error',
+          4000
+        );
+      }
     } finally {
       setLoading(false);
     }
-  };
+  }, [showNotification]);
+
+  // Cargar datos desde Firebase
+  useEffect(() => {
+    loadCascos();
+  }, [loadCascos]);
 
   /**
    * Maneja el scroll horizontal de la tabla para actualizar indicadores
@@ -186,15 +197,30 @@ const Cascos = () => {
 
       if (editingItem) {
         await cascosService.update(editingItem.id, dataToSave);
+        showNotification(
+          `✅ Casco de seguridad "${formData.nombre}" (${formData.codigo}) actualizado exitosamente`,
+          'success',
+          4000
+        );
       } else {
         await cascosService.add(dataToSave);
+        showNotification(
+          `⛑️ Nuevo casco de seguridad "${formData.nombre}" (${formData.codigo}) agregado al inventario`,
+          'success',
+          4000
+        );
       }
       
-      await loadCascos();
+      await loadCascos(true);
       setShowModal(false);
       resetForm();
     } catch (error) {
       console.error('Error al guardar:', error);
+      showNotification(
+        `❌ Error al ${editingItem ? 'actualizar' : 'guardar'} el casco de seguridad: ${error.message}`,
+        'error',
+        5000
+      );
     }
   };
 
@@ -205,12 +231,26 @@ const Cascos = () => {
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm('¿Estás seguro de eliminar este elemento?')) {
+    // Encontrar el item a eliminar para mostrar información en la notificación
+    const itemToDelete = cascos.find(item => item.id === id);
+    const itemName = itemToDelete ? `${itemToDelete.nombre} (${itemToDelete.codigo})` : 'el elemento';
+    
+    if (window.confirm(`¿Estás seguro de eliminar ${itemName}?`)) {
       try {
         await cascosService.delete(id);
-        await loadCascos();
+        await loadCascos(true);
+        showNotification(
+          `🗑️ Casco de seguridad "${itemName}" eliminado exitosamente`,
+          'success',
+          3000
+        );
       } catch (error) {
         console.error('Error al eliminar:', error);
+        showNotification(
+          `❌ Error al eliminar el casco de seguridad: ${error.message}`,
+          'error',
+          4000
+        );
       }
     }
   };
@@ -596,6 +636,12 @@ const Cascos = () => {
           </div>
         </div>
       )}
+
+      {/* Contenedor de notificaciones */}
+      <NotificationContainer 
+        notifications={notifications}
+        onRemove={removeNotification}
+      />
     </div>
   );
 };

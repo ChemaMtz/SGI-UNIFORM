@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { 
   MdAdd, 
   MdEdit, 
@@ -11,6 +11,7 @@ import {
 } from 'react-icons/md';
 import { FaShoePrints } from 'react-icons/fa';
 import { botasService } from '../firebase/services';
+import NotificationContainer, { useNotification } from './Notification';
 import '../styles/inventory.css';
 
 /**
@@ -34,6 +35,9 @@ const BotasDialectricas = () => {
 
   // Referencia para el contenedor de la tabla
   const tableContainerRef = useRef(null);
+
+  // Hook para manejar notificaciones
+  const { notifications, showNotification, removeNotification } = useNotification();
 
   // Configuración del formulario con estructura CSV
   const [formData, setFormData] = useState({
@@ -90,12 +94,7 @@ const BotasDialectricas = () => {
     setEditingItem(null);
   };
 
-  // Cargar datos desde Firebase
-  useEffect(() => {
-    loadBotas();
-  }, []);
-
-  const loadBotas = async () => {
+  const loadBotas = useCallback(async (showErrorNotification = false) => {
     try {
       const data = await botasService.getAll();
       // Procesar datos para calcular totalStock y actualizar estado basado en el stock
@@ -121,10 +120,22 @@ const BotasDialectricas = () => {
       setBotas(processedData);
     } catch (error) {
       console.error('Error al cargar botas:', error);
+      if (showErrorNotification) {
+        showNotification(
+          `❌ Error al cargar las botas dieléctricas: ${error.message}`,
+          'error',
+          4000
+        );
+      }
     } finally {
       setLoading(false);
     }
-  };
+  }, [showNotification]);
+
+  // Cargar datos desde Firebase
+  useEffect(() => {
+    loadBotas();
+  }, [loadBotas]);
 
   /**
    * Maneja el scroll horizontal de la tabla para actualizar indicadores
@@ -184,15 +195,30 @@ const BotasDialectricas = () => {
 
       if (editingItem) {
         await botasService.update(editingItem.id, dataToSave);
+        showNotification(
+          `✅ Bota dieléctrica "${formData.nombre}" (${formData.codigo}) actualizada exitosamente`,
+          'success',
+          4000
+        );
       } else {
         await botasService.add(dataToSave);
+        showNotification(
+          `🥾 Nueva bota dieléctrica "${formData.nombre}" (${formData.codigo}) agregada al inventario`,
+          'success',
+          4000
+        );
       }
       
-      await loadBotas();
+      await loadBotas(true);
       setShowModal(false);
       resetForm();
     } catch (error) {
       console.error('Error al guardar:', error);
+      showNotification(
+        `❌ Error al ${editingItem ? 'actualizar' : 'guardar'} la bota dieléctrica: ${error.message}`,
+        'error',
+        5000
+      );
     }
   };
 
@@ -203,12 +229,26 @@ const BotasDialectricas = () => {
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm('¿Estás seguro de eliminar este elemento?')) {
+    // Encontrar el item a eliminar para mostrar información en la notificación
+    const itemToDelete = botas.find(item => item.id === id);
+    const itemName = itemToDelete ? `${itemToDelete.nombre} (${itemToDelete.codigo})` : 'el elemento';
+    
+    if (window.confirm(`¿Estás seguro de eliminar ${itemName}?`)) {
       try {
         await botasService.delete(id);
-        await loadBotas();
+        await loadBotas(true);
+        showNotification(
+          `🗑️ Bota dieléctrica "${itemName}" eliminada exitosamente`,
+          'success',
+          3000
+        );
       } catch (error) {
         console.error('Error al eliminar:', error);
+        showNotification(
+          `❌ Error al eliminar la bota dieléctrica: ${error.message}`,
+          'error',
+          4000
+        );
       }
     }
   };
@@ -621,6 +661,12 @@ const BotasDialectricas = () => {
           </div>
         </div>
       )}
+
+      {/* Contenedor de notificaciones */}
+      <NotificationContainer 
+        notifications={notifications}
+        onRemove={removeNotification}
+      />
     </div>
   );
 };

@@ -1,5 +1,5 @@
 // Importaciones de React y hooks necesarios
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 // Importación de iconos de Material Design para la interfaz
 import { 
   MdAdd,           // Icono para agregar nuevos elementos
@@ -14,6 +14,8 @@ import {
 } from 'react-icons/md';
 // Servicio de Firebase para operaciones CRUD de Googles
 import { googlesService } from '../firebase/services';
+// Componente de notificaciones
+import NotificationContainer, { useNotification } from './Notification';
 // Estilos CSS específicos para componentes de inventario
 import '../styles/inventory.css';
 
@@ -65,6 +67,9 @@ const Googles = () => {
 
   // Referencia para el contenedor de la tabla
   const tableContainerRef = useRef(null);
+
+  // Hook para manejar notificaciones
+  const { notifications, showNotification, removeNotification } = useNotification();
 
   // ============= CONFIGURACIÓN DEL FORMULARIO =============
   
@@ -142,15 +147,11 @@ const Googles = () => {
   // ============= EFECTOS Y CARGA DE DATOS =============
   
   // Efecto para cargar datos al montar el componente
-  useEffect(() => {
-    loadGoogles();
-  }, []);
-
   /**
    * Carga todos los googles desde Firebase y procesa los datos
    * Calcula automáticamente el stock total y actualiza estados según disponibilidad
    */
-  const loadGoogles = async () => {
+  const loadGoogles = useCallback(async (showErrorNotification = false) => {
     try {
       const data = await googlesService.getAll();
       
@@ -179,10 +180,21 @@ const Googles = () => {
       setGoogles(processedData);
     } catch (error) {
       console.error('Error al cargar googles:', error);
+      if (showErrorNotification) {
+        showNotification(
+          `❌ Error al cargar los googles de protección: ${error.message}`,
+          'error',
+          4000
+        );
+      }
     } finally {
       setLoading(false);
     }
-  };
+  }, [showNotification]);
+
+  useEffect(() => {
+    loadGoogles();
+  }, [loadGoogles]);
 
   /**
    * Maneja el scroll horizontal de la tabla para actualizar indicadores
@@ -250,17 +262,32 @@ const Googles = () => {
       if (editingItem) {
         // Actualización de elemento existente
         await googlesService.update(editingItem.id, dataToSave);
+        showNotification(
+          `✅ Google de protección "${formData.nombre}" (${formData.codigo}) actualizado exitosamente`,
+          'success',
+          4000
+        );
       } else {
         // Creación de nuevo elemento
         await googlesService.add(dataToSave);
+        showNotification(
+          `🥽 Nuevo google de protección "${formData.nombre}" (${formData.codigo}) agregado al inventario`,
+          'success',
+          4000
+        );
       }
       
       // Recarga de datos y cierre del modal
-      await loadGoogles();
+      await loadGoogles(true);
       setShowModal(false);
       resetForm();
     } catch (error) {
       console.error('Error al guardar:', error);
+      showNotification(
+        `❌ Error al ${editingItem ? 'actualizar' : 'guardar'} el google de protección: ${error.message}`,
+        'error',
+        5000
+      );
     }
   };
 
@@ -279,12 +306,26 @@ const Googles = () => {
    * @param {string} id - ID del elemento a eliminar
    */
   const handleDelete = async (id) => {
-    if (window.confirm('¿Estás seguro de eliminar este elemento?')) {
+    // Encontrar el item a eliminar para mostrar información en la notificación
+    const itemToDelete = googles.find(item => item.id === id);
+    const itemName = itemToDelete ? `${itemToDelete.nombre} (${itemToDelete.codigo})` : 'el elemento';
+    
+    if (window.confirm(`¿Estás seguro de eliminar ${itemName}?`)) {
       try {
         await googlesService.delete(id);
-        await loadGoogles();
+        await loadGoogles(true);
+        showNotification(
+          `🗑️ Google de protección "${itemName}" eliminado exitosamente`,
+          'success',
+          3000
+        );
       } catch (error) {
         console.error('Error al eliminar:', error);
+        showNotification(
+          `❌ Error al eliminar el google de protección: ${error.message}`,
+          'error',
+          4000
+        );
       }
     }
   };
@@ -681,6 +722,12 @@ const Googles = () => {
           </div>
         </div>
       )}
+
+      {/* Contenedor de notificaciones */}
+      <NotificationContainer 
+        notifications={notifications}
+        onRemove={removeNotification}
+      />
     </div>
   );
 };

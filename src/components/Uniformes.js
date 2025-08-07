@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { 
   MdAdd, 
   MdEdit, 
@@ -11,6 +11,7 @@ import {
   MdChevronRight
 } from 'react-icons/md';
 import { uniformesService } from '../firebase/services';
+import NotificationContainer, { useNotification } from './Notification';
 import '../styles/inventory.css';
 
 /**
@@ -36,6 +37,9 @@ const Uniformes = () => {
 
   // Referencia para el contenedor de la tabla
   const tableContainerRef = useRef(null);
+
+  // Hook para manejar notificaciones
+  const { notifications, showNotification, removeNotification } = useNotification();
 
   // Configuración del formulario con estructura CSV
   const [formData, setFormData] = useState({
@@ -111,12 +115,7 @@ const Uniformes = () => {
     setEditingItem(null);
   };
 
-  // Cargar datos desde Firebase
-  useEffect(() => {
-    loadUniformes();
-  }, []);
-
-  const loadUniformes = async () => {
+  const loadUniformes = useCallback(async (showErrorNotification = false) => {
     try {
       const data = await uniformesService.getAll();
       // Procesar datos para calcular totalStock y actualizar estado basado en el stock
@@ -144,10 +143,22 @@ const Uniformes = () => {
       setUniformes(processedData);
     } catch (error) {
       console.error('Error al cargar uniformes:', error);
+      if (showErrorNotification) {
+        showNotification(
+          `❌ Error al cargar los uniformes: ${error.message}`,
+          'error',
+          4000
+        );
+      }
     } finally {
       setLoading(false);
     }
-  };
+  }, [showNotification]);
+
+  // Cargar datos desde Firebase
+  useEffect(() => {
+    loadUniformes();
+  }, [loadUniformes]);
 
   /**
    * Maneja el scroll horizontal de la tabla para actualizar indicadores
@@ -228,15 +239,30 @@ const Uniformes = () => {
 
       if (editingItem) {
         await uniformesService.update(editingItem.id, dataToSave);
+        showNotification(
+          `✅ Uniforme "${formData.tipo}" (${formData.codigo}) actualizado exitosamente`,
+          'success',
+          4000
+        );
       } else {
         await uniformesService.add(dataToSave);
+        showNotification(
+          `🎉 Nuevo uniforme "${formData.tipo}" (${formData.codigo}) agregado al inventario`,
+          'success',
+          4000
+        );
       }
       
-      await loadUniformes();
+      await loadUniformes(true);
       setShowModal(false);
       resetForm();
     } catch (error) {
       console.error('Error al guardar:', error);
+      showNotification(
+        `❌ Error al ${editingItem ? 'actualizar' : 'guardar'} el uniforme: ${error.message}`,
+        'error',
+        5000
+      );
     }
   };
 
@@ -247,12 +273,26 @@ const Uniformes = () => {
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm('¿Estás seguro de eliminar este elemento?')) {
+    // Encontrar el item a eliminar para mostrar información en la notificación
+    const itemToDelete = uniformes.find(item => item.id === id);
+    const itemName = itemToDelete ? `${itemToDelete.tipo} (${itemToDelete.codigo})` : 'el elemento';
+    
+    if (window.confirm(`¿Estás seguro de eliminar ${itemName}?`)) {
       try {
         await uniformesService.delete(id);
-        await loadUniformes();
+        await loadUniformes(true);
+        showNotification(
+          `🗑️ Uniforme "${itemName}" eliminado exitosamente`,
+          'success',
+          3000
+        );
       } catch (error) {
         console.error('Error al eliminar:', error);
+        showNotification(
+          `❌ Error al eliminar el uniforme: ${error.message}`,
+          'error',
+          4000
+        );
       }
     }
   };
@@ -720,6 +760,12 @@ const Uniformes = () => {
           </div>
         </div>
       )}
+
+      {/* Contenedor de notificaciones */}
+      <NotificationContainer 
+        notifications={notifications}
+        onRemove={removeNotification}
+      />
     </div>
   );
 };

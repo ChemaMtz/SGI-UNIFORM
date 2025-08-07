@@ -95,7 +95,7 @@ const Login = ({ onLogin }) => {
               <MdInventory size={60} />
             </div>
             <h1>Sistema de Inventario</h1>
-            <h2>Universitario</h2>
+            <h2>Uniformes</h2>
             <p className="brand-description">
               Gestión inteligente de equipos de protección personal con 
               tecnología moderna y diseño responsivo.
@@ -184,7 +184,7 @@ const Login = ({ onLogin }) => {
 
               <div className="login-help">
                 <small>
-                  🔐 <strong>Acceso del Sistema:</strong> Usa las credenciales configuradas en Firebase
+                  🔐 <strong>Acceso del Sistema:</strong> 🔐 Correo: admin@example.com, Contraseña: Admin1234!
                 </small>
               </div>
             </form>
