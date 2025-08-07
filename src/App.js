@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 
 // Importación de componentes de la aplicación
 import Login from './components/Login';              // Página de inicio de sesión
+import DiagnosticPage from './components/DiagnosticPage'; // Página de diagnóstico
 import Sidebar from './components/Sidebar';         // Barra lateral de navegación
 import Dashboard from './components/Dashboard';     // Panel principal con estadísticas
 import Uniformes from './components/Uniformes';     // Gestión de uniformes
@@ -34,6 +35,7 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
+  const [firebaseError, setFirebaseError] = useState(null);
   
   // Estado para controlar qué sección está activa
   const [activeSection, setActiveSection] = useState('dashboard');
@@ -48,31 +50,37 @@ function App() {
   useEffect(() => {
     console.log('🔥 Iniciando Firebase Auth...');
     
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      console.log('🔐 Estado de autenticación:', firebaseUser ? 'Autenticado' : 'No autenticado');
-      
-      if (firebaseUser) {
-        // Usuario autenticado
-        setCurrentUser(firebaseUser);
-        setIsAuthenticated(true);
-        setUser({
-          name: firebaseUser.displayName || firebaseUser.email?.split('@')[0] || 'Usuario',
-          role: 'Usuario del Sistema',
-          email: firebaseUser.email
-        });
-        localStorage.setItem('inventario_logged_in', 'true');
-      } else {
-        // Usuario no autenticado
-        setCurrentUser(null);
-        setIsAuthenticated(false);
-        setUser({ name: 'Usuario', role: 'Usuario del Sistema' });
-        localStorage.removeItem('inventario_logged_in');
-      }
-      setLoading(false);
-    });
+    try {
+      const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+        console.log('🔐 Estado de autenticación:', firebaseUser ? 'Autenticado' : 'No autenticado');
+        
+        if (firebaseUser) {
+          // Usuario autenticado
+          setCurrentUser(firebaseUser);
+          setIsAuthenticated(true);
+          setUser({
+            name: firebaseUser.displayName || firebaseUser.email?.split('@')[0] || 'Usuario',
+            role: 'Usuario del Sistema',
+            email: firebaseUser.email
+          });
+          localStorage.setItem('inventario_logged_in', 'true');
+        } else {
+          // Usuario no autenticado
+          setCurrentUser(null);
+          setIsAuthenticated(false);
+          setUser({ name: 'Usuario', role: 'Usuario del Sistema' });
+          localStorage.removeItem('inventario_logged_in');
+        }
+        setLoading(false);
+      });
 
-    // Cleanup subscription
-    return () => unsubscribe();
+      // Cleanup subscription
+      return () => unsubscribe();
+    } catch (error) {
+      console.error('❌ Error inicializando Firebase:', error);
+      setFirebaseError(error);
+      setLoading(false);
+    }
   }, []);
 
   // Manejar login exitoso
@@ -104,6 +112,11 @@ function App() {
         </div>
       </div>
     );
+  }
+
+  // Si hay error de Firebase, mostrar diagnóstico
+  if (firebaseError) {
+    return <DiagnosticPage error={firebaseError} />;
   }
 
   // Si no está autenticado, mostrar página de login

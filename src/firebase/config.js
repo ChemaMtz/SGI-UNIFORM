@@ -12,7 +12,17 @@ import { initializeApp } from "firebase/app";        // Inicialización de la ap
 import { getFirestore } from "firebase/firestore";   // Base de datos Firestore
 import { getAuth } from "firebase/auth";             // Servicio de autenticación
 
-// 🔒 Configuración segura usando variables de entorno
+// Debug: Mostrar variables de entorno en desarrollo
+if (process.env.NODE_ENV === 'development') {
+  console.log('� Debug Firebase Config:', {
+    hasApiKey: !!process.env.REACT_APP_FIREBASE_API_KEY,
+    hasAuthDomain: !!process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    hasProjectId: !!process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    nodeEnv: process.env.NODE_ENV
+  });
+}
+
+// �🔒 Configuración segura usando variables de entorno con fallbacks
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY || "AIzaSyA5S4hHybf-5hZR9zrezT1DR6anPsIIsbw",
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN || "inventario-bf8a2.firebaseapp.com",
@@ -22,6 +32,12 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID || "1:473600818810:web:4cfe39f9643f14f9d1c5c3",
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID || "G-RZVKMCMYFB"
 };
+
+console.log('🔥 Firebase Config Status:', {
+  apiKey: firebaseConfig.apiKey ? '✅ Configurado' : '❌ Falta',
+  authDomain: firebaseConfig.authDomain ? '✅ Configurado' : '❌ Falta',
+  projectId: firebaseConfig.projectId ? '✅ Configurado' : '❌ Falta'
+});
 
 // Validación de configuración (opcional pero recomendado)
 const requiredConfig = ['apiKey', 'authDomain', 'projectId', 'storageBucket', 'messagingSenderId', 'appId'];
