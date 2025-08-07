@@ -14,13 +14,13 @@ import { getAuth } from "firebase/auth";             // Servicio de autenticaci�
 
 // 🔒 Configuración segura usando variables de entorno
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY || "AIzaSyA5S4hHybf-5hZR9zrezT1DR6anPsIIsbw",
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN || "inventario-bf8a2.firebaseapp.com",
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID || "inventario-bf8a2",
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET || "inventario-bf8a2.firebasestorage.app",
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID || "473600818810",
+  appId: process.env.REACT_APP_FIREBASE_APP_ID || "1:473600818810:web:4cfe39f9643f14f9d1c5c3",
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID || "G-RZVKMCMYFB"
 };
 
 // Validación de configuración (opcional pero recomendado)
@@ -29,7 +29,15 @@ const missingConfig = requiredConfig.filter(key => !firebaseConfig[key]);
 
 if (missingConfig.length > 0) {
   console.error('⚠️ Faltan variables de entorno de Firebase:', missingConfig);
-  console.error('🔧 Asegúrate de tener un archivo .env con las configuraciones necesarias');
+  console.error('🔧 Asegúrate de tener las variables de entorno configuradas correctamente');
+  console.error('🌍 Variables actuales:', {
+    apiKey: !!process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: !!process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: !!process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: !!process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: !!process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: !!process.env.REACT_APP_FIREBASE_APP_ID
+  });
 }
 
 // Inicialización de la aplicación Firebase

@@ -184,7 +184,7 @@ const Login = ({ onLogin }) => {
 
               <div className="login-help">
                 <small>
-                  🔐 <strong>Usuario único:</strong> Correo: admin@example.com, Contraseña: Admin1234!
+                  🔐 <strong>Acceso del Sistema:</strong> Usa las credenciales configuradas en Firebase
                 </small>
               </div>
             </form>

@@ -46,7 +46,11 @@ function App() {
 
   // Verificar autenticación con Firebase al cargar la aplicación
   useEffect(() => {
+    console.log('🔥 Iniciando Firebase Auth...');
+    
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      console.log('🔐 Estado de autenticación:', firebaseUser ? 'Autenticado' : 'No autenticado');
+      
       if (firebaseUser) {
         // Usuario autenticado
         setCurrentUser(firebaseUser);
