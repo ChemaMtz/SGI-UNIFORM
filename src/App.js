@@ -1,5 +1,6 @@
 // Importaciones de React y hooks
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 
 // Importación de componentes de la aplicación
 import Login from './components/Login';              // Página de inicio de sesión
@@ -21,11 +22,11 @@ import './App.css';
  * Componente principal de la aplicación
  * 
  * Maneja la autenticación y navegación entre diferentes secciones del sistema 
- * de inventario y renderiza el contenido correspondiente según la sección activa.
+ * de inventario usando React Router con HashRouter.
  * 
  * Características principales:
  * - Sistema de autenticación simple
- * - Sistema de navegación por pestañas
+ * - Sistema de navegación por rutas (HashRouter)
  * - Gestión de usuario
  * - Estructura modular para diferentes tipos de inventario
  */
@@ -34,8 +35,9 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   
-  // Estado para controlar qué sección está activa
-  const [activeSection, setActiveSection] = useState('dashboard');
+  // Hooks de React Router
+  const navigate = useNavigate();
+  const location = useLocation();
   
   // Usuario - ahora se obtiene de Firebase
   const [user, setUser] = useState({
@@ -86,7 +88,7 @@ function App() {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      setActiveSection('dashboard'); // Resetear a dashboard
+      navigate('/'); // Navegar al dashboard después del logout
     } catch (error) {
       console.error('Error al cerrar sesión:', error);
     }
@@ -109,41 +111,59 @@ function App() {
     return <Login onLogin={handleLogin} />;
   }
 
-  /**
-   * Renderiza el contenido principal según la sección activa
-   * @returns {JSX.Element} Componente correspondiente a la sección seleccionada
-   */
-  const renderContent = () => {
-    switch (activeSection) {
-      case 'dashboard':
-        return <Dashboard setActiveSection={setActiveSection} />;
+  // Obtener la sección activa basada en la ruta actual
+  const getActiveSection = () => {
+    const pathname = location.pathname;
+    if (pathname === '/uniformes') return 'uniformes';
+    if (pathname === '/botas-dialectricas') return 'botas_dialectricas';
+    if (pathname === '/cascos') return 'cascos';
+    if (pathname === '/googles') return 'googles';
+    return 'dashboard';
+  };
+
+  // Función para navegar entre secciones
+  const navigateToSection = (section) => {
+    switch (section) {
       case 'uniformes':
-        return <Uniformes />;
+        navigate('/uniformes');
+        break;
       case 'botas_dialectricas':
-        return <BotasDialectricas />;
+        navigate('/botas-dialectricas');
+        break;
       case 'cascos':
-        return <Cascos />;
+        navigate('/cascos');
+        break;
       case 'googles':
-        return <Googles />;
+        navigate('/googles');
+        break;
       default:
-        return <Dashboard setActiveSection={setActiveSection} />; // Fallback al dashboard
+        navigate('/');
+        break;
     }
   };
 
-  // Renderizado principal con sidebar y contenido dinámico
+  // Renderizado principal con sidebar y rutas
   return (
     <div className="app">
       {/* Barra lateral con navegación */}
       <Sidebar 
-        activeSection={activeSection} 
-        setActiveSection={setActiveSection} 
+        activeSection={getActiveSection()} 
+        setActiveSection={navigateToSection} 
         user={user}
         onLogout={handleLogout}
       />
       
-      {/* Área de contenido principal */}
+      {/* Área de contenido principal con rutas */}
       <div className="app-content">
-        {renderContent()}
+        <Routes>
+          <Route path="/" element={<Dashboard setActiveSection={navigateToSection} />} />
+          <Route path="/uniformes" element={<Uniformes />} />
+          <Route path="/botas-dialectricas" element={<BotasDialectricas />} />
+          <Route path="/cascos" element={<Cascos />} />
+          <Route path="/googles" element={<Googles />} />
+          {/* Redireccionar rutas no encontradas al dashboard */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </div>
     </div>
   );
