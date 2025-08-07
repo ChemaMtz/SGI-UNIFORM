@@ -1,0 +1,1128 @@
+/* 
+ * 🎨 SISTEMA DE INVENTARIO UNIVERSITARIO - ESTILOS PERSONALIZADOS
+ * Paleta moderna con colores vibrantes y tipografía elegante
+ * Inspiración: Diseño corporativo moderno con toques de color
+ */
+
+/* 🚀 IMPORTACIÓN DE FUENTES MODERNAS */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* 🎯 VARIABLES DE DISEÑO PERSONALIZADO */
+:root {
+  /* 🎨 Paleta de Colores Principal */
+  --color-primary: #1e40af;        /* Azul profundo - Profesionalismo */
+  --color-primary-light: #3b82f6;  /* Azul brillante - Hover states */
+  --color-primary-dark: #1e3a8a;   /* Azul oscuro - Elementos activos */
+  
+  --color-secondary: #059669;      /* Verde esmeralda - Éxito */
+  --color-secondary-light: #10b981; /* Verde brillante */
+  --color-secondary-dark: #047857;  /* Verde oscuro */
+  
+  --color-accent: #ea580c;         /* Naranja vibrante - Llamadas a la acción */
+  --color-accent-light: #fb923c;   /* Naranja claro */
+  --color-accent-dark: #c2410c;    /* Naranja oscuro */
+  
+  /* 🌫️ Paleta de Neutros Suaves para Ojos */
+  --color-bg: #f1f3f4;            /* Gris neutro cálido - Fondo principal */
+  --color-surface: #f8f9fa;        /* Gris muy suave - Tarjetas y modales */
+  --color-surface-elevated: #e9ecef; /* Gris claro - Elementos elevados */
+  --color-white: #f4f6f8;         /* Blanco cálido - Reemplazo de blanco puro */
+  
+  --color-text-primary: #2d3748;   /* Gris oscuro suave - Texto principal */
+  --color-text-secondary: #4a5568; /* Gris medio - Texto secundario */
+  --color-text-muted: #718096;     /* Gris claro - Texto deshabilitado */
+  
+  --color-border: #e2e8f0;         /* Gris claro - Bordes sutiles */
+  --color-border-strong: #cbd5e0;  /* Gris medio - Bordes prominentes */
+  
+  /* 🎯 Estados de Componentes */
+  --color-success: #059669;        /* Verde - Estados positivos */
+  --color-warning: #d97706;        /* Ámbar - Advertencias */
+  --color-danger: #dc2626;         /* Rojo - Errores y peligros */
+  --color-info: #0284c7;          /* Azul claro - Información */
+  
+  /* 📐 Sistema de Espaciado */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+  --spacing-2xl: 32px;
+  --spacing-3xl: 48px;
+  
+  /* 🎪 Radios de Borde Modernos */
+  --border-radius: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  --border-radius-full: 9999px;
+  
+  /* 🌟 Sombras Elegantes */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* 🎭 Transiciones Suaves */
+  --transition-fast: 0.15s ease-out;
+  --transition-normal: 0.3s ease-out;
+  --transition-slow: 0.5s ease-out;
+  
+  /* ✍️ Tipografía Moderna */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-secondary: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+/* 🏠 ESTILOS BASE DE COMPONENTES */
+
+/* Contenedor principal con gradiente suave y cálido */
+.inventory-container {
+  padding: var(--spacing-2xl);
+  background: linear-gradient(135deg, #e8eaf0 0%, var(--color-bg) 100%);
+  min-height: 100vh;
+  font-family: var(--font-primary);
+}
+
+/* Encabezado de página con fondo cálido y suave */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-2xl);
+  background: linear-gradient(135deg, var(--color-surface) 0%, #eff1f3 100%);
+  padding: var(--spacing-2xl);
+  border-radius: var(--border-radius-xl);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+/* Contenido del encabezado con mejor spacing */
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+/* 🎯 Icono de página con gradiente */
+.page-icon {
+  font-size: 32px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 4px rgba(30, 64, 175, 0.2));
+}
+
+/* 🏷️ Títulos con tipografía moderna */
+.page-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  font-family: var(--font-secondary);
+  background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 var(--spacing-xs) 0;
+  letter-spacing: -0.5px;
+}
+
+.page-header p {
+  color: var(--color-text-secondary);
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: var(--font-primary);
+}
+
+/* 🔍 SECCIÓN DE FILTROS MEJORADA */
+.filters-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+  background: var(--color-surface);
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  gap: var(--spacing-lg);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+/* 🔍 Caja de búsqueda con efectos */
+.search-box {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  font-size: 15px;
+  font-family: var(--font-primary);
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+  transform: translateY(-1px);
+}
+
+.search-box input::placeholder {
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+/* 🔍 Icono de búsqueda moderno */
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-secondary);
+  font-size: 18px;
+  transition: color var(--transition-fast);
+}
+
+.search-box input:focus + .search-icon {
+  color: var(--color-primary);
+}
+
+/* 🎛️ Controles de filtro elegantes */
+.filter-controls {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+.filter-select {
+  padding: 10px 16px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  font-family: var(--font-primary);
+  font-size: 14px;
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  min-width: 140px;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+/* 📊 TABLA DE INVENTARIO MODERNA */
+/* Contenedor principal de tabla */
+.table-wrapper {
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+/* Contenedor responsivo de tabla */
+.table-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  position: relative;
+}
+
+/* Barra de scroll personalizada para mejor UX */
+.table-container::-webkit-scrollbar {
+  height: 10px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: var(--color-bg);
+  border-radius: 5px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 5px;
+  border: 2px solid var(--color-bg);
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-dark);
+}
+
+/* 🎯 Botones de navegación horizontal de tabla */
+.table-scroll-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.scroll-button {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.scroll-button:hover {
+  background: var(--color-primary-dark);
+  transform: scale(1.1);
+  box-shadow: var(--shadow-md);
+}
+
+.scroll-button:active {
+  transform: scale(0.95);
+}
+
+.scroll-button:disabled {
+  background: var(--color-text-muted);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.scroll-left {
+  margin-right: 4px;
+}
+
+.scroll-right {
+  margin-left: 4px;
+}
+
+/* Indicador de scroll para móviles */
+.table-scroll-hint {
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-border);
+  animation: pulse 2s infinite;
+}
+
+/* Mini navegación para tabla */
+.table-navigation {
+  background: var(--color-surface);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.nav-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-border);
+  transition: background 0.3s ease;
+}
+
+.dot.active {
+  background: var(--color-primary);
+}
+
+.nav-indicator small {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+/* Indicadores de color mejorados para todos los componentes */
+.color-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.color-circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.inventory-table {
+  background: transparent;
+  border-radius: 0;
+  border: none;
+  overflow: visible;
+  box-shadow: none;
+  min-width: 900px; /* Ancho mínimo para mantener todas las columnas visibles */
+}
+
+.inventory-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.inventory-table th {
+  background: #e9ecef;
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--color-border-light);
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.inventory-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-border-light);
+  color: var(--color-secondary);
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* Primera columna sticky para mejor navegación */
+.inventory-table th:first-child,
+.inventory-table td:first-child {
+  position: sticky;
+  left: 0;
+  background: var(--color-surface);
+  z-index: 3;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.inventory-table th:first-child {
+  background: #e9ecef;
+}
+
+.inventory-table tbody tr:hover {
+  background: #f1f3f4;
+}
+
+.inventory-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Indicadores de estado */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.badge-success {
+  background: #f0f9ff;
+  color: var(--color-success);
+}
+
+.badge-warning {
+  background: #faf6eb;
+  color: var(--color-warning);
+}
+
+.badge-danger {
+  background: #fef2f2;
+  color: var(--color-danger);
+}
+
+.badge-secondary {
+  background: #e9ecef;
+  color: var(--color-tertiary);
+}
+
+/* Estilos para cabeceras ordenables */
+.inventory-table th[style*="cursor: pointer"] {
+  -webkit-user-select: none;
+  user-select: none;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.inventory-table th[style*="cursor: pointer"]:hover {
+  background-color: var(--color-hover, #f5f5f5);
+}
+
+.inventory-table th[style*="cursor: pointer"]:active {
+  background-color: var(--color-active, #e5e5e5);
+}
+
+/* Badge de color personalizado */
+.color-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 4px 8px;
+  background: #f8f9fa;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+.color-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+/* Indicador de color */
+.color-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.color-circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+/* Stock bajo */
+.stock-low {
+  color: var(--color-warning) !important;
+  font-weight: 600;
+}
+
+/* 🎨 BOTONES DE ACCIÓN MODERNOS */
+.action-buttons {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+
+/* Botón base con efectos suaves */
+.btn-action {
+  padding: 8px 10px;
+  border: none;
+  border-radius: var(--border-radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-action:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-action:active {
+  transform: translateY(0);
+}
+
+/* 📝 Botón de edición elegante */
+.btn-edit {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  color: #0369a1;
+  border: 1px solid rgba(3, 105, 161, 0.2);
+}
+
+.btn-edit:hover {
+  background: linear-gradient(135deg, #bae6fd 0%, #7dd3fc 100%);
+  color: #0c4a6e;
+  border-color: rgba(3, 105, 161, 0.3);
+}
+
+/* 🗑️ Botón de eliminar con gradiente */
+.btn-delete {
+  background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+  color: #dc2626;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+.btn-delete:hover {
+  background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+  color: #b91c1c;
+  border-color: rgba(220, 38, 38, 0.3);
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #f4f6f8;
+  border-radius: var(--border-radius-lg);
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-xl);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--color-tertiary);
+  cursor: pointer;
+  padding: var(--spacing-xs);
+  border-radius: var(--border-radius);
+  transition: all 0.15s ease;
+}
+
+.modal-close:hover {
+  background: #f5f5f5;
+  color: var(--color-primary);
+}
+
+/* Formulario */
+.modal-form {
+  padding: var(--spacing-xl);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.form-group label {
+  font-weight: 500;
+  color: var(--color-secondary);
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  color: var(--color-primary);
+  background: #f8f9fa;
+  transition: border-color 0.15s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-border-light);
+}
+
+/* Estados de carga */
+.text-center {
+  text-align: center;
+  color: var(--color-tertiary);
+  padding: var(--spacing-xl);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .inventory-container {
+    padding: var(--spacing-lg);
+  }
+  
+  .page-header {
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    align-items: stretch;
+  }
+  
+  .filters-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filter-controls {
+    flex-wrap: wrap;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .modal-actions {
+    flex-direction: column;
+  }
+  
+  /* Hacer tabla responsiva con scroll horizontal */
+  .table-container {
+    overflow-x: auto;
+    border-radius: var(--border-radius);
+  }
+  
+  .table-container::after {
+    display: block;
+    opacity: 0.7;
+  }
+  
+  .inventory-table {
+    min-width: 900px;
+    font-size: 13px;
+  }
+  
+  .inventory-table th,
+  .inventory-table td {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  
+  .inventory-table th:first-child,
+  .inventory-table td:first-child {
+    min-width: 100px;
+  }
+  
+  /* Modal responsive */
+  .modal-content {
+    max-width: 95%;
+    margin: 20px auto;
+  }
+}
+
+/* Tablet responsive */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .inventory-container {
+    padding: var(--spacing-xl);
+  }
+  
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop responsive */
+@media (min-width: 1200px) {
+  .inventory-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .inventory-table {
+    font-size: 14px;
+  }
+}
+
+/* Ultra small mobile screens */
+@media (max-width: 480px) {
+  .inventory-container {
+    padding: var(--spacing-md);
+  }
+  
+  .page-header {
+    padding: var(--spacing-lg);
+  }
+  
+  .page-header h1 {
+    font-size: 20px;
+  }
+  
+  .btn-primary {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  /* Tabla ultra responsiva */
+  .table-container {
+    margin: 0 -16px; /* Extiende hasta los bordes en móvil */
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    position: relative;
+  }
+  
+  .table-wrapper {
+    border-radius: 0;
+    margin: 0 -16px;
+    border-left: none;
+    border-right: none;
+  }
+  
+  .table-navigation {
+    padding: 8px 16px;
+    background: var(--color-primary);
+    color: white;
+  }
+  
+  .table-navigation small {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .table-scroll-hint {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+  
+  /* Botón de ayuda flotante para navegación */
+  .table-help-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+  }
+  
+  .table-help-btn:hover {
+    background: var(--color-primary-dark);
+    transform: scale(1.1);
+  }
+  
+  .inventory-table {
+    min-width: 800px; /* Reducido para móviles pequeños */
+    font-size: 11px;
+  }
+  
+  .inventory-table th,
+  .inventory-table td {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+  
+  .inventory-table th:first-child,
+  .inventory-table td:first-child {
+    min-width: 80px;
+    padding-left: 12px;
+  }
+  
+  .inventory-table th:last-child,
+  .inventory-table td:last-child {
+    padding-right: 12px;
+  }
+  
+  /* Botones de acción más pequeños */
+  .action-buttons {
+    gap: 4px;
+  }
+  
+  .btn-action {
+    padding: 4px;
+    min-width: 28px;
+    height: 28px;
+  }
+  
+  .modal-content {
+    max-width: 98%;
+    margin: 10px auto;
+    padding: 12px;
+  }
+  
+  .modal-header h3 {
+    font-size: 16px;
+  }
+  
+  .form-group label {
+    font-size: 13px;
+  }
+  
+  .form-group input,
+  .form-group select {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+  
+  .btn {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
+/* Badges específicos */
+.sexo-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.sexo-badge.mujer {
+  background: #f7e8f2;
+  color: #be185d;
+}
+
+.sexo-badge.hombre {
+  background: #eff6ff;
+  color: #1e40af;
+}
+
+.proteccion-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 4px 8px;
+  background: #e9ecef;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-secondary);
+}
+
+/* 🚀 BOTONES PRINCIPALES PERSONALIZADOS */
+
+/* Botón primario con gradiente vibrante */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-lg);
+  font-family: var(--font-primary);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-primary:active {
+  transform: translateY(-1px);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left var(--transition-slow);
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+/* Botón secundario elegante */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-light) 100%);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-lg);
+  font-family: var(--font-primary);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(135deg, var(--color-secondary-dark) 0%, var(--color-secondary) 100%);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Botón de acento llamativo */
+.btn-accent {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-lg);
+  font-family: var(--font-primary);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-accent:hover {
+  background: linear-gradient(135deg, var(--color-accent-dark) 0%, var(--color-accent) 100%);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* 🔧 UTILIDADES RESPONSIVAS */
+
+/* Clases de utilidad para mostrar/ocultar en diferentes tamaños */
+.show-mobile {
+  display: none;
+}
+
+.show-tablet {
+  display: none;
+}
+
+.show-desktop {
+  display: block;
+}
+
+@media (max-width: 480px) {
+  .hide-mobile {
+    display: none !important;
+  }
+  
+  .show-mobile {
+    display: block;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .hide-tablet {
+    display: none !important;
+  }
+  
+  .show-tablet {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .hide-desktop {
+    display: none !important;
+  }
+}
+
+/* Utilidades de espaciado responsivo */
+@media (max-width: 768px) {
+  .responsive-spacing {
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin: var(--spacing-sm) 0;
+  }
+}
+
+/* Utilidades de texto responsivo */
+@media (max-width: 480px) {
+  .responsive-text {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .responsive-text {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}
+
+/* 🎯 FIN DEL ARCHIVO */

@@ -1,38 +1,234 @@
+/* 🌟 SISTEMA DE INVENTARIO UNIVERSITARIO - ESTILOS GLOBALES */
+/* Importación de fuentes modernas */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* 🎯 Reset y configuración base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 🎨 Configuración del cuerpo con colores suaves y cálidos */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #e8eaf0 0%, #f1f3f4 100%);
+  color: #2d3748;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* 🏢 Contenedor principal de la aplicación */
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  display: flex;
   min-height: 100vh;
+  position: relative;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+}
+
+.app-content {
+  flex: 1;
+  margin-left: 280px;
+  background: linear-gradient(135deg, #e8eaf0 0%, #f1f3f4 100%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* 🔄 Pantalla de carga */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loading-content {
+  text-align: center;
+  color: white;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-content p {
+  font-size: 16px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+/* 📄 Contenido principal con fondo cálido y suave */
+.main-content {
+  flex: 1;
+  margin-left: 280px;
+  background: linear-gradient(135deg, #e8eaf0 0%, #f1f3f4 100%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* 🚀 Sección "Próximamente" con fondo suave */
+.coming-soon {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  height: 60vh;
+  text-align: center;
+  padding: 48px;
+  background: linear-gradient(135deg, #f4f6f8 0%, #e9ecef 100%);
+  margin: 24px;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.coming-soon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #1e40af 0%, #059669 50%, #ea580c 100%);
+}
+
+.coming-soon h2 {
+  font-size: 36px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  background: linear-gradient(135deg, #2d3748 0%, #1e40af 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+
+.coming-soon p {
+  font-size: 18px;
+  color: #6b6b6b;
+  max-width: 400px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    margin-top: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    margin-top: 70px;
+    padding: 8px;
+  }
+  
+  .coming-soon h1 {
+    font-size: 24px;
+  }
+  
+  .coming-soon p {
+    font-size: 16px;
+  }
+}
+
+/* Ultra wide screens */
+@media (min-width: 1920px) {
+  .main-content {
+    max-width: 1800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 280px;
+  }
+}
+
+/* Global Button Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: #1a1a1a;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.btn-primary:hover {
+  background: #2c2c2c;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn-secondary {
+  background: #f4f6f8;
+  color: #4a4a4a;
+  border: 1px solid #d0d0d0;
+}
+
+.btn-secondary:hover {
+  background: #e9ecef;
+  border-color: #b0b0b0;
+}
+
+/* Loading States */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 2px solid #e0e0e0;
+  border-top: 2px solid #1a1a1a;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

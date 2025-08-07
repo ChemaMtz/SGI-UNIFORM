@@ -13,11 +13,24 @@
 
 # misc
 .DS_Store
+
+# 🔒 ARCHIVOS DE CONFIGURACIÓN SENSIBLES - NO SUBIR
+.env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
+# 🔥 FIREBASE KEYS - NUNCA SUBIR
+firebase-config.js
+firebase-adminsdk-*.json
+serviceAccountKey.json
+
+# 📝 LOGS
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# 🗂️ ARCHIVOS DEL SISTEMA
+Thumbs.db
+.vscode/settings.json

@@ -1,33 +1,63 @@
-# Getting Started with Create React App
+# 🎓 Sistema de Inventario Universitario
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Sistema de gestión de inventario para equipos de protección personal (EPP) desarrollado en React con Firebase.
 
-## Available Scripts
+## 📋 Características
 
-In the project directory, you can run:
+- ✅ Gestión completa de inventario (CRUD)
+- 🔍 Búsqueda y filtrado avanzado
+- 📱 Diseño responsive para móviles y desktop
+- 🎨 Interfaz moderna con paleta de colores personalizada
+- 🔒 Autenticación segura con Firebase
+- 📊 Control de stock en tiempo real
+- 🚀 Navegación horizontal en tablas
 
-### `npm start`
+## 🛠️ Tecnologías Utilizadas
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **React** 18+ - Framework de JavaScript
+- **Firebase** - Backend como servicio (BaaS)
+- **Material Design Icons** - Iconografía
+- **CSS Modules** - Estilos modularizados
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📦 Inventario Gestionado
 
-### `npm test`
+- **Lentes de Seguridad** (GOG-XXX)
+- **Botas Dieléctricas** (BDI-XXX)  
+- **Cascos de Seguridad** (CAS-XXX)
+- **Uniformes** (PMC-XXX, PML-XXX, CAM-XXX)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🚀 Instalación y Configuración
 
-### `npm run build`
+### 1. Clonar el repositorio
+```bash
+git clone [URL_DEL_REPOSITORIO]
+cd int-uni
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2. Instalar dependencias
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 3. Configurar Firebase
+1. Crea un proyecto en [Firebase Console](https://console.firebase.google.com)
+2. Habilita Firestore Database
+3. Copia el archivo `.env.example` a `.env`
+4. Completa las variables de entorno con tu configuración de Firebase:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```env
+REACT_APP_FIREBASE_API_KEY=tu_api_key_aqui
+REACT_APP_FIREBASE_AUTH_DOMAIN=tu_proyecto.firebaseapp.com
+REACT_APP_FIREBASE_PROJECT_ID=tu_project_id
+REACT_APP_FIREBASE_STORAGE_BUCKET=tu_proyecto.appspot.com
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=123456789
+REACT_APP_FIREBASE_APP_ID=1:123456789:web:abcdef123456
+```
+
+### 4. Ejecutar la aplicación
+```bash
+npm start
+```
 
 ### `npm run eject`
 
