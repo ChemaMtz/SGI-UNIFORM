@@ -103,8 +103,8 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 1.5rem;
-  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 
 .system-branding h1 {
@@ -322,7 +322,7 @@
     grid-template-columns: 1fr;
     max-width: 400px;
     width: 95%;
-    min-height: auto;
+    min-height: unset;
   }
   
   .login-info {
