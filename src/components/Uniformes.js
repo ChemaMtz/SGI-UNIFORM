@@ -70,7 +70,11 @@ const Uniformes = () => {
       'Verde blanco y rojo': '#16a34a',
       'Transparentes': '#f3f4f6',
       'Naranja y negro': '#ea580c',
-      'Cafe obscuro': '#451a03'
+      'Cafe obscuro': '#451a03',
+      'Azul Navy': '#001f3f',
+      'Azul Oxford': '#0d3b66',
+      'Gris Jaspe': '#8d99ae',
+      'Sport Grey': '#a8a8a8'
     };
     return colorMap[colorName] || '#6b7280';
   };
@@ -663,6 +667,10 @@ const Uniformes = () => {
                     <option value="Cafe-naranja">Cafe-naranja</option>
                     <option value="Blanco">Blanco</option>
                     <option value="Rosa">Rosa</option>
+                    <option value="Azul Navy">Azul Navy</option>
+                    <option value="Azul Oxford">Azul Oxford</option>
+                    <option value="Gris Jaspe">Gris Jaspe</option>
+                    <option value="Sport Grey">Sport Grey</option>
                   </select>
                 </div>
 
