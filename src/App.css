@@ -16,10 +16,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #e8eaf0 0%, #f1f3f4 100%);
+  background: #11293E;
   color: #2d3748;
   line-height: 1.6;
   font-weight: 400;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 /* 🏢 Contenedor principal de la aplicación */
@@ -27,18 +30,26 @@ body {
   display: flex;
   min-height: 100vh;
   position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .app {
   display: flex;
   min-height: 100vh;
   position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .app-content {
   flex: 1;
   margin-left: 280px;
-  background: linear-gradient(135deg, #e8eaf0 0%, #f1f3f4 100%);
+  background: transparent;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow-x: hidden;

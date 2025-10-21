@@ -11,24 +11,25 @@ import {
   FaShoePrints
 } from 'react-icons/fa';
 import './Sidebar.css';
+import logoHulux from '../assets/images/LOGO NEGATIVO X AZUL.png';
 
 const Sidebar = ({ activeSection, setActiveSection, user, onLogout }) => {
   const menuItems = [
-    { id: 'dashboard', icon: MdDashboard, label: 'Dashboard', color: '#3b82f6' },
-    { id: 'uniformes', icon: MdInventory, label: 'Uniformes', color: '#10b981' },
-    { id: 'botas_dialectricas', icon: FaShoePrints, label: 'Botas Dieléctricas', color: '#8b5cf6' },
-    { id: 'cascos', icon: FaHardHat, label: 'Cascos', color: '#f59e0b' },
-    { id: 'googles', icon: MdRemoveRedEye, label: 'Googles', color: '#ef4444' }
+    { id: 'dashboard', icon: MdDashboard, label: 'Dashboard', color: '#94EDF2' },
+    { id: 'uniformes', icon: MdInventory, label: 'Uniformes', color: '#CDDB00' },
+    { id: 'botas_dialectricas', icon: FaShoePrints, label: 'Botas Dieléctricas', color: '#FF5E00' },
+    { id: 'cascos', icon: FaHardHat, label: 'Cascos', color: '#94EDF2' },
+    { id: 'googles', icon: MdRemoveRedEye, label: 'Goggles', color: '#70003F' }
   ];
 
   return (
     <div className="sidebar">
       <div className="sidebar-header">
         <div className="logo">
-          <div className="logo-icon">SGI</div>
+          <img src={logoHulux} alt="Hulux Logo" className="logo-image" />
           <div className="logo-text">
-            <h3>SGI - Hulux Telecomunicaciones</h3>
-            <p>Sistema de Gestión de Inventarios</p>
+            <h3>Sistema de Gestión</h3>
+            <p>Inventarios</p>
           </div>
         </div>
       </div>
@@ -38,11 +39,11 @@ const Sidebar = ({ activeSection, setActiveSection, user, onLogout }) => {
           <MdPeople size={20} />
         </div>
         <div className="user-info">
-          <p className="user-name">{user?.name || 'Juan Pérez'}</p>
-          <p className="user-role">{user?.role || 'Administrador'}</p>
+          <p className="user-name">{user?.name || 'Admin'}</p>
+          <p className="user-role">{user?.role || 'Usuario del Sistema'}</p>
         </div>
         <button className="user-logout" onClick={onLogout} title="Cerrar Sesión">
-          <MdLogout size={16} />
+          <MdLogout size={18} />
         </button>
       </div>
 

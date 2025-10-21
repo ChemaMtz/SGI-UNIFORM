@@ -20,6 +20,9 @@ import {
 import { dashboardService } from '../firebase/services';
 import { findAndRemoveDuplicates, showDatabaseStats } from '../utils/removeDuplicates';
 
+// Imagen de fondo
+import backgroundImage from '../assets/images/Hulux.jpeg';
+
 // Estilos específicos del dashboard
 import './Dashboard.css';
 
@@ -153,9 +156,9 @@ const Dashboard = ({ setActiveSection }) => {
     return (
       <div className={`stat-card stat-card-${color}`}>
         <div className="stat-header">
-          <Icon className="stat-icon" size={24} />
+          <Icon className="stat-icon" size={28} />
           <div className="stat-percentage">
-            {trend === 'up' ? <MdTrendingUp size={16} /> : <MdTrendingDown size={16} />}
+            {trend === 'up' ? <MdTrendingUp size={18} /> : <MdTrendingDown size={18} />}
             {percentage}%
           </div>
         </div>
@@ -247,7 +250,7 @@ const Dashboard = ({ setActiveSection }) => {
               activities.map((activity, index) => (
                 <div key={index} className="activity-item">
                   <div className="activity-icon">
-                    {activity.type === 'warning' ? <MdWarning size={16} /> : <FaBoxes size={16} />}
+                    {activity.type === 'warning' ? <MdWarning size={20} /> : <FaBoxes size={20} />}
                   </div>
                   <div className="activity-content">
                     <p>{activity.message}</p>
@@ -258,7 +261,7 @@ const Dashboard = ({ setActiveSection }) => {
             ) : (
               <div className="activity-item">
                 <div className="activity-icon">
-                  <FaBoxes size={16} />
+                  <FaBoxes size={20} />
                 </div>
                 <div className="activity-content">
                   <p>Sistema funcionando correctamente</p>
@@ -275,19 +278,19 @@ const Dashboard = ({ setActiveSection }) => {
           </div>
           <div className="quick-actions">
             <button className="quick-action-btn" onClick={navigateToUniformes}>
-              <MdInventory size={24} />
+              <MdInventory size={28} />
               <span>Gestionar Uniformes</span>
             </button>
             <button className="quick-action-btn" onClick={navigateToBotas}>
-              <FaBoxes size={24} />
+              <FaBoxes size={28} />
               <span>Botas Dieléctricas</span>
             </button>
             <button className="quick-action-btn" onClick={navigateToCascos}>
-              <MdGpsFixed size={24} />
+              <MdGpsFixed size={28} />
               <span>Control de Cascos</span>
             </button>
             <button className="quick-action-btn" onClick={navigateToGoogles}>
-              <MdCheckCircle size={24} />
+              <MdCheckCircle size={28} />
               <span>Lentes de Seguridad</span>
             </button>
             <button 
@@ -295,7 +298,7 @@ const Dashboard = ({ setActiveSection }) => {
               onClick={handleShowStats}
               disabled={showingStats}
             >
-              <MdTrendingUp size={24} />
+              <MdTrendingUp size={28} />
               <span>{showingStats ? 'Consultando...' : 'Estadísticas BD'}</span>
             </button>
             <button 
@@ -303,7 +306,7 @@ const Dashboard = ({ setActiveSection }) => {
               onClick={handleRemoveDuplicates}
               disabled={cleaningDuplicates}
             >
-              <MdWarning size={24} />
+              <MdWarning size={28} />
               <span>{cleaningDuplicates ? 'Limpiando...' : 'Limpiar Duplicados'}</span>
             </button>
           </div>

@@ -4,9 +4,34 @@
 
 .dashboard {
   padding: 24px;
-  background: linear-gradient(135deg, #e8eaf0 0%, #f1f3f4 100%);
+  background-image: url('../assets/images/Hulux.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   min-height: 100vh;
+  width: 100%;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  position: relative;
+  margin: 0;
+}
+
+.dashboard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(17, 41, 62, 0.95) 0%, rgba(17, 41, 62, 0.92) 100%);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  z-index: 0;
+}
+
+.dashboard > * {
+  position: relative;
+  z-index: 1;
 }
 
 .dashboard-header {
@@ -14,30 +39,36 @@
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 32px;
-  background: linear-gradient(135deg, #f4f6f8 0%, #eff1f3 100%);
+  background: linear-gradient(135deg, rgba(17, 41, 62, 0.8) 0%, rgba(17, 41, 62, 0.9) 100%);
   padding: 32px;
   border-radius: 16px;
-  border: 1px solid #d0d7de;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+  border: 2px solid rgba(148, 237, 242, 0.3);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 
 .header-content h1 {
   font-size: 32px;
   font-weight: 700;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #2d3748 0%, #1e40af 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #94EDF2;
   margin: 0 0 8px 0;
   letter-spacing: -0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.header-content h1::after {
+  content: ' | Dashboard';
+  color: #FF5E00;
 }
 
 .header-content p {
-  color: #4a5568;
+  color: #F2F2F2;
   margin: 0;
   font-size: 16px;
   font-weight: 400;
+  opacity: 0.9;
 }
 
 .header-actions {
@@ -49,22 +80,22 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 20px;
-  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #FF5E00 0%, #ff7a33 100%);
   color: white;
   border: none;
-  border-radius: 10px;
-  font-weight: 600;
+  border-radius: 12px;
+  font-weight: 700;
   font-family: 'Inter', sans-serif;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 6px rgba(30, 64, 175, 0.2);
+  box-shadow: 0 4px 6px rgba(255, 94, 0, 0.3);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 8px rgba(30, 64, 175, 0.3);
+  background: linear-gradient(135deg, #ff7a33 0%, #FF5E00 100%);
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 8px 12px rgba(255, 94, 0, 0.4);
 }
 
 /* 📊 GRID DE ESTADÍSTICAS CON COLORES SUAVES */
@@ -76,14 +107,16 @@
 }
 
 .stat-card {
-  background: linear-gradient(135deg, #f4f6f8 0%, #eff1f3 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%);
   padding: 28px;
   border-radius: 16px;
-  border: 1px solid #d0d7de;
+  border: 2px solid rgba(17, 41, 62, 0.08);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 4px rgba(17, 41, 62, 0.08);
   position: relative;
   overflow: hidden;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 
 .stat-card::before {
@@ -93,7 +126,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #1e40af 0%, #3b82f6 100%);
+  background: linear-gradient(90deg, #11293E 0%, #FF5E00 100%);
 }
 
 .stat-card:hover {
@@ -102,17 +135,17 @@
   border-color: #c1c9d0;
 }
 
-/* Tarjetas temáticas con gradientes suaves */
+/* Tarjetas temáticas con gradientes corporativos Hulux */
 .stat-card-blue::before {
-  background: linear-gradient(90deg, #1e40af 0%, #3b82f6 100%);
+  background: linear-gradient(90deg, #11293E 0%, #1e40af 100%);
 }
 
 .stat-card-orange::before {
-  background: linear-gradient(90deg, #ea580c 0%, #fb923c 100%);
+  background: linear-gradient(90deg, #FF5E00 0%, #ff7a33 100%);
 }
 
 .stat-card-purple::before {
-  background: linear-gradient(90deg, #7c3aed 0%, #a855f7 100%);
+  background: linear-gradient(90deg, #70003F 0%, #a855f7 100%);
 }
 
 .stat-card-green::before {
@@ -120,11 +153,11 @@
 }
 
 .stat-card-teal::before {
-  background: linear-gradient(90deg, #0d9488 0%, #14b8a6 100%);
+  background: linear-gradient(90deg, #94EDF2 0%, #14b8a6 100%);
 }
 
 .stat-card-indigo::before {
-  background: linear-gradient(90deg, #4f46e5 0%, #6366f1 100%);
+  background: linear-gradient(90deg, #11293E 0%, #4f46e5 100%);
 }
 
 .stat-header {
@@ -135,10 +168,50 @@
 }
 
 .stat-icon {
-  padding: 10px;
-  border-radius: 6px;
-  background: #f5f5f5;
-  color: #4a4a4a;
+  padding: 14px;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.stat-icon:hover {
+  transform: scale(1.05);
+}
+
+/* Colores específicos para cada tipo de tarjeta con colores Hulux */
+.stat-card-blue .stat-icon {
+  color: #ffffff;
+  background: linear-gradient(135deg, #11293E 0%, #1e40af 100%);
+}
+
+.stat-card-orange .stat-icon {
+  color: #ffffff;
+  background: linear-gradient(135deg, #FF5E00 0%, #ff7a33 100%);
+}
+
+.stat-card-purple .stat-icon {
+  color: #ffffff;
+  background: linear-gradient(135deg, #70003F 0%, #a855f7 100%);
+}
+
+.stat-card-green .stat-icon {
+  color: #ffffff;
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+}
+
+.stat-card-teal .stat-icon {
+  color: #11293E;
+  background: linear-gradient(135deg, #94EDF2 0%, #b0f3f7 100%);
+}
+
+.stat-card-indigo .stat-icon {
+  color: #ffffff;
+  background: linear-gradient(135deg, #11293E 0%, #4f46e5 100%);
 }
 
 .stat-percentage {
@@ -156,22 +229,24 @@
 
 .stat-content h3 {
   font-size: 14px;
-  color: #6b6b6b;
+  color: #6b7280;
   margin: 0 0 8px 0;
-  font-weight: 500;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .stat-value {
-  font-size: 32px;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-size: 36px;
+  font-weight: 700;
+  color: #11293E;
   margin: 0;
   line-height: 1;
 }
 
 .stat-unit {
   font-size: 14px;
-  color: #6b6b6b;
+  color: #6b7280;
   margin-left: 4px;
 }
 
@@ -182,21 +257,23 @@
 }
 
 .section {
-  background: #f4f6f8;
-  border-radius: 8px;
-  border: 1px solid #e5e5e5;
+  background: linear-gradient(135deg, #F2F2F2 0%, #ffffff 100%);
+  border-radius: 16px;
+  border: none;
   overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 .section-header {
   padding: 20px 24px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 2px solid rgba(17, 41, 62, 0.1);
+  background: linear-gradient(135deg, rgba(148, 237, 242, 0.1) 0%, rgba(17, 41, 62, 0.05) 100%);
 }
 
 .section-header h2 {
-  font-size: 18px;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-size: 20px;
+  font-weight: 700;
+  color: #11293E;
   margin: 0;
 }
 
@@ -213,15 +290,19 @@
 }
 
 .activity-item:hover {
-  background: #f1f3f4;
+  background: linear-gradient(135deg, rgba(148, 237, 242, 0.08) 0%, rgba(17, 41, 62, 0.02) 100%);
 }
 
 .activity-icon {
-  padding: 8px;
-  background: #e9ecef;
-  border-radius: 6px;
-  color: #4a4a4a;
+  padding: 10px;
+  background: linear-gradient(135deg, #94EDF2 0%, #b0f3f7 100%);
+  border-radius: 8px;
+  color: #11293E;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(17, 41, 62, 0.15);
 }
 
 .activity-content p {
@@ -245,23 +326,56 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 16px;
-  background: #f1f3f4;
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #F2F2F2 100%);
+  border: 2px solid rgba(17, 41, 62, 0.1);
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: left;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Inter', sans-serif;
 }
 
-.quick-action-btn:hover {
-  background: #e9ecef;
-  border-color: #d0d0d0;
+.quick-action-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(148, 237, 242, 0.2) 0%, rgba(148, 237, 242, 0.1) 100%);
+  border-color: #94EDF2;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(17, 41, 62, 0.15);
+}
+
+.quick-action-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.quick-action-btn svg {
+  color: #11293E;
+  flex-shrink: 0;
+}
+
+.quick-action-btn.secondary svg {
+  color: #CDDB00;
+}
+
+.quick-action-btn.danger svg {
+  color: #FF5E00;
+}
+
+.quick-action-btn.danger:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(255, 94, 0, 0.08) 0%, rgba(255, 122, 51, 0.05) 100%);
+  border-color: #FF5E00;
+}
+
+.quick-action-btn.secondary:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(205, 219, 0, 0.08) 0%, rgba(217, 230, 77, 0.05) 100%);
+  border-color: #CDDB00;
 }
 
 .quick-action-btn span {
-  font-weight: 500;
-  color: #1a1a1a;
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 15px;
 }
 
 .quick-action-btn.danger {
