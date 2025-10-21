@@ -440,10 +440,25 @@
     flex-direction: column;
     gap: 16px;
     align-items: stretch;
+    padding: 20px;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .header-content h1 {
+    font-size: 24px;
+  }
+  
+  .header-content p {
+    font-size: 14px;
   }
   
   .stats-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
   
   .stat-card {
@@ -451,7 +466,7 @@
   }
   
   .stat-card h3 {
-    font-size: 14px;
+    font-size: 13px;
   }
   
   .stat-value {
@@ -465,6 +480,7 @@
   .activity-item {
     padding: 8px 16px;
     gap: 12px;
+    flex-wrap: wrap;
   }
   
   .activity-icon {
@@ -475,11 +491,28 @@
     padding: 12px;
     font-size: 14px;
   }
+  
+  .quick-actions-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
 }
 
 @media (max-width: 480px) {
   .dashboard {
     padding: 12px;
+  }
+  
+  .dashboard-header {
+    padding: 16px;
+  }
+  
+  .header-content h1 {
+    font-size: 20px;
+  }
+  
+  .header-content p {
+    font-size: 12px;
   }
   
   .stat-card {
@@ -490,13 +523,29 @@
     font-size: 24px;
   }
   
+  .stat-card h3 {
+    font-size: 12px;
+  }
+  
   .activity-item {
     padding: 6px 12px;
     gap: 8px;
   }
   
-  .quick-action-btn {
-    padding: 8px;
+  .activity-details h4 {
     font-size: 13px;
+  }
+  
+  .activity-details span {
+    font-size: 11px;
+  }
+  
+  .quick-action-btn {
+    padding: 10px;
+    font-size: 13px;
+  }
+  
+  .section-header h2 {
+    font-size: 16px;
   }
 }
