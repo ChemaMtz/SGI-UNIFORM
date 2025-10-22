@@ -74,7 +74,9 @@ const Uniformes = () => {
       'Azul Navy': '#001f3f',
       'Azul Oxford': '#0d3b66',
       'Gris Jaspe': '#8d99ae',
-      'Sport Grey': '#a8a8a8'
+      'Sport Grey': '#a8a8a8',
+      'Gris Carbón': '#36454f',
+      'Naranja Oxford': '#cc5500'
     };
     return colorMap[colorName] || '#6b7280';
   };
@@ -671,6 +673,8 @@ const Uniformes = () => {
                     <option value="Azul Oxford">Azul Oxford</option>
                     <option value="Gris Jaspe">Gris Jaspe</option>
                     <option value="Sport Grey">Sport Grey</option>
+                    <option value="Gris Carbón">Gris Carbón</option>
+                    <option value="Naranja Oxford">Naranja Oxford</option>
                   </select>
                 </div>
 
